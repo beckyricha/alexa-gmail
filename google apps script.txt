@@ -1,0 +1,329 @@
+function getPrinterList(auth) {
+  //returns a list of online printers, except "save to Google Drive." 
+  // I left off G Drive for target audience needs, but don't have enough info to do the same for fedex office. 
+ var printlist = [];
+  var name;
+  //cloud print is not paart of hte google apps script suite, so has to be called with good old fashioned http.  
+  //However, it works more easily from here than directly from the lambda function.
+  var responseString = UrlFetchApp.fetch('https://www.google.com/cloudprint/search', {
+    headers: {
+      Authorization: 'Bearer ' + auth
+    },
+    muteHttpExceptions: true
+  }).getContentText();
+  try {
+    //need to parse the response here, to only return the desired printers.
+  var responseObject = JSON.parse(responseString);
+    //cloud print returns "success":true for successful calls. If so, check printers for online and not G-Drive.
+  if(responseObject.success) {
+    var printers=responseObject.printers;
+    for (var p in printers) {
+      //if you want 'save to google drive as an option, uncomment the following and remove the existing if statement:
+      //if(printers[p].connectionStatus=="ONLINE"){
+      if(printers[p].type!=="DRIVE"&&printers[p].connectionStatus=="ONLINE"){
+        printlist.push([printers[p].id, printers[p].displayName]);
+      }
+    }
+  }
+    else {printlist=[];} //prefer to return empty result vs error, for graceful skill behavior.
+  } catch(e){printlist=[];}
+  return printlist;
+}
+
+function print(auth,printerID, messageID,attachmentIndex){  
+  //same function is called for 2 purposes.  First call prints to google drive, grabs thee returned page count,
+  //and then deleted the resulting file.  Most reiable way I found to provide user a page count estimate
+  //to confirm printing, absent a visible widget or other user interface.
+  //Second call will send the same job to the user's printer, after their confirmation.
+  
+  var message=GmailApp.getMessageById(messageID);
+  var fetchString='https://www.google.com/cloudprint/submit';
+  var printData, dataType, title,jobReturn;  
+  
+  //If attachmentIndex is not passed, the call is for the message body.
+  if(!attachmentIndex&&attachmentIndex!==0){
+    printData='Email Printed from Alexa<br><br>To: '+message.getTo()+'<br>From: '+message.getFrom()+'<br>Date Received: '+message.getDate()+'<br><br>'+message.getBody();
+    dataType="text/html";
+    title ="Alexa Email Print";
+  } else{
+    //print attachment. The calling function already processed error handling
+    var attachments = message.getAttachments(); 
+    printData=attachments[attachmentIndex];
+    dataType=printData.getContentType();
+    title = printData.getName();
+  } 
+  var ticket = {
+    version: "1.0",
+    print: {}
+  };
+  var payload = {
+    "printerid" : printerID,
+    "title"     : title,
+    "content"   : printData,
+    "contentType": dataType,
+    "ticket"    : JSON.stringify(ticket)
+  };
+ var responseString = UrlFetchApp.fetch(fetchString, {
+    method: "POST",
+    payload: payload,
+    headers: {
+      Authorization: 'Bearer ' + auth
+    },
+    "muteHttpExceptions": true
+  }).getContentText();
+  var files = DriveApp.getFilesByName(title);
+  while(files.hasNext()){
+    fileID=files.next().getId();
+    localDelete(fileID,auth);
+  } 
+  try {
+    //need to parse the response here, to only return the desired printers, but returns as a string and reparses
+    //in the lambda function because it was behaving badly returning the object.
+  var responseObject = JSON.parse(responseString);
+    //cloud print returns "success":true for successful calls. If so, check printers for online and not G-Drive.
+  if(responseObject.success) {
+    jobReturn=[responseObject.success,responseObject.job.numberOfPages];
+  }
+    else {jobReturn=[0];} 
+  } catch(e){jobReturn=[0];}
+    //return responseString; //this will be parsed in the lambda function
+    return jobReturn;
+} 
+
+function getAttachments(messageID){
+  //checks for attachments to a message. This is far more straightforward than writing code to search 
+  //various mime types manually, and is the main reason apps script was first added to the skill.
+   var message=GmailApp.getMessageById(messageID);
+    var attachmentblobs = message.getAttachments();
+    var attachments=[];
+  var storedType, blobType, namesplit;
+  if(attachmentblobs){
+  for (var i in attachmentblobs){
+    //splitting serves a coulpe of purposes.  First, eases reporting to the user about the file types.
+    //second, provides the file name without Alexa trying (badly) to read the extension.
+    namesplit=attachmentblobs[i].getName().split(".")
+    storedType =attachmentblobs[i].getContentType();
+    switch(namesplit[1].substr(0,3)){ //identify file type by first 3 chars of extension - helps with docx,pptx,etc.
+        
+        //If you want to identify and report more file types, add them here.  However, do not change the jpeg and png
+        //from "an image" and do not give other image types this exact name.  The "show me" feature uses this label to
+        //determine whether an image can be displayed on a card in the Alexaa app.  Keep in mind that the skill will
+        //say that attachment {3} is {blobtype} called {filename}.
+        
+      case 'jpg':
+        blobType='an image';
+        break;
+      case 'jpe':
+        blobType='an image';
+        break;  
+      case 'png':
+        blobType='an image';
+        break;
+      case 'tif':
+        blobType='a tiff image';
+        break;
+      case 'doc':
+        blobType='a word processing document';
+        break;
+      case 'xls':
+        blobType='a spreadsheet';
+        break;
+      case 'txt':
+        blobType='a text file';
+        break;
+      case 'exe':
+        blobType='a program';
+        break;
+      case 'bat':
+        blobType='a program';
+        break;
+      case 'ppt':
+        blobType='a PowerPoint presentation';
+        break;
+      case 'pdf':
+        blobType='a PDF file';
+        break;
+      default:
+        blobType="a file type I don't recognize";
+    }
+    attachments.push([blobType,namesplit[0]]);   //add the result to an array that will be returned
+  }
+  }    
+    return attachments;
+ }
+
+function getPlainBody(messageID){
+  //fetches the message body as plain text for Alexa reading.  Much simpleer than trying to manually extract it
+  //from a multipart email message.
+   var message=GmailApp.getMessageById(messageID);
+   var plainBody = message.getPlainBody();
+   return plainBody;
+}
+
+function sendReply(messageID,content){
+   var message=GmailApp.getMessageById(messageID);
+    var x = message.reply(content);
+  return "OK";
+}
+
+function sendReplyAll(messageID,content){
+   var message=GmailApp.getMessageById(messageID);
+    var x = message.replyAll(content);
+   return "OK";
+}
+
+function setpin(mypin){
+  //sets the skill pin, saving it in a file called "AlexaPIN" on their Google Drive.
+  //the passed parameter will be either a 4-digit pin, or the string 'notneeded' to indicate that
+  //the user has declined to set a PIN and caan have access without one.
+  if(mypin==0){mypin="0000";} //zero messes with file comparison unless changed to a string
+  
+  var myname = "AlexaPIN";
+  var pinset;
+    //check for existing file with this name.
+  var foldername="Alexa-Skill-Files"
+  var fileID, files, folder;
+  var folders = DriveApp.getFoldersByName(foldername)
+  if(!folders.hasNext()){
+    DriveApp.createFolder(foldername);
+    folders = DriveApp.getFoldersByName(foldername)}
+  folder=folders.next();
+  files = folder.getFilesByName(myname)
+  if (files.hasNext()){
+    pinset=files.next().setContent(mypin);
+  } else {   //create the PIN file if it does not exist
+    pinset = folder.createFile(myname, mypin);
+  }
+  return pinset.getId(); //id is not needed in the skill, but returning a file attribute allows evaluation of success.
+}
+
+function checkpin(mypin,auth){
+mypin=0000;
+  //check whether a PIN is needed on skill opening, and/or check the PIN entered by the user.
+  //if user opened without saying a PIN (typical use case) this will first pass in null, and return match if not needed,
+  //or nomatch otherwise, so that the skill will either prompt for a PIN or continue executing the user intent.
+  //calls again when user says a PIN (or anything else) until there is a match.  On the 5th try the skill is locked and user
+  //must go to the skill's web site or Google Drive to reset the PIN.  (3 tries is too low for target audience)
+  if(mypin===0){mypin="0000";}
+  var myname = "AlexaPIN";
+  var pincheck, pinresult,myFile,files, folder, fileID;
+  var foldername="Alexa-Skill-Files"
+  var folders = DriveApp.getFoldersByName(foldername)
+  if(!folders.hasNext()){
+    DriveApp.createFolder(foldername);
+    folders = DriveApp.getFoldersByName(foldername)}
+  folder=folders.next();
+  files = folder.getFilesByName(myname)
+  if(files.hasNext()){ 
+    myFile=files.next();
+    fileID = myFile.getId();
+      pincheck=myFile.getBlob().getDataAsString();//content of file is only a 4 digit PIN, the string 'notneeded' or 'locked'
+      switch(pincheck){
+      case mypin:
+        pinresult='match';
+        break;
+      case 'notneeded':
+        pinresult='match';
+        break;
+      case 'locked':
+        pinresult='locked';
+        break;  
+      default:
+        //only get here by no match, but could be a PIN attempt or some other intent
+          if(mypin){ //user provided an incorrect PIN
+            myname='failedPINCount';
+            files = folder.getFilesByName(myname);
+            if(files.hasNext()){ //if failed attempt counter already exists, increment and test for too many
+              myFile=files.next();
+              pincheck=parseInt(myFile.getBlob().getDataAsString('ascii')); //reused existing variable instead of declaring another
+              ++pincheck;
+              myFile.setContent(pincheck.toString()); //update attempt counter file with increment
+              if(pincheck>=5){ //if you want more or less attempts before lockout change the "5" here.                
+                pinresult='locked';
+                DriveApp.getFileById(fileID).setContent('locked');
+              } 
+            } else { //start a failed attempt counter file with value 1;
+              folder.createFile(myname, "1");
+            }
+          }
+          if(pinresult!='locked'){pinresult='nomatch';} //send back nomatch, unless it was reset to locked
+      }
+  } else { //no PIN file exists
+    pinresult = 'notset';
+  }
+ //check for a previous failed PIN attempt counter, and delete it if PIN is now OK
+  if(pinresult=='notset'||pinresult=='match'){ //could be either of these after user resets PIN
+    myname='failedPINCount';
+    files = folder.getFilesByName(myname);
+    while (files.hasNext()){
+      myFile=files.next().getId();
+      localDelete(myFile,auth);
+    }
+  }
+  return pinresult;
+}
+
+function showAttachment(messageID,attachmentIndex){
+//saves image to google drive and gets file id to use when user says "show me" to send to an Alexa card
+  var myname="cardImage"; //temp file name to use when storing image
+  var requestedblob=GmailApp.getMessageById(messageID).getAttachments()[attachmentIndex];
+  var foldername="Alexa-Skill-Files"
+  var folders = DriveApp.getFoldersByName(foldername)
+  if(!folders.hasNext()){
+    DriveApp.createFolder(foldername);
+    folders = DriveApp.getFoldersByName(foldername)}
+  var folder = folders.next();
+  fileID=folder.createFile(requestedblob).getId()
+  return fileID;
+}
+
+function modifyMsg(messageID,intent){
+//processes changes to messages
+var message=GmailApp.getMessageById(messageID);
+var result;
+switch(intent) {
+  case 'MarkReadIntent':
+    result = message.markRead();
+    break;
+  case 'MarkUnReadIntent':
+    result = message.markUnread();
+    break;
+  case 'AMAZON.YesIntent':
+   result = message.moveToTrash();
+    break;
+  case 'StarIntent':
+   result = message.star();
+    break;
+  case 'UnStarIntent':
+   result = message.unstar();
+}
+return "OK";
+}    
+   
+function deleteFiles(auth){
+  //used to clean up old stored files on opening the skill
+  var myname="cardImage"; //temp file name used when storing image
+  var foldername="Alexa-Skill-Files"
+  var fileID, files, folder;
+  var folders = DriveApp.getFoldersByName(foldername)
+  if(folders.hasNext()){
+    folder=folders.next();
+    files = folder.getFilesByName(myname)
+    while (files.hasNext()){ //clear any "show me" image files
+      fileID=files.next().getId();
+      localDelete(fileID,auth);
+    } 
+   } else {DriveApp.createFolder(foldername);}
+   return;
+}
+
+function localDelete(fileID,auth) {
+      var options = {
+      headers: {
+      Authorization: 'Bearer ' + auth
+      },'method' : 'DELETE'}
+      var fetch='https://www.googleapis.com/drive/v2/files/'+fileID
+      var resp = UrlFetchApp.fetch(fetch,options);
+      return;
+}
+  
