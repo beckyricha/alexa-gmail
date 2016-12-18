@@ -1,0 +1,68 @@
+Type: helptopics
+Values:
+check my email
+print
+get attachments
+delete
+delete a message
+erase 
+erase a message
+connect a printer
+go to the next message
+move around messages
+move to other messages
+go back
+check a diferent account
+get all my messages
+get just my new messages
+
+type: readtypes
+values:
+read
+unread
+new
+old
+all
+total
+starred
+important
+
+type: replies
+values:
+I got your message.
+I'll be there.
+I can't make it.
+I'll call you about this.
+Thanks for the photos.
+Thanks for your note.
+That's great news.
+I'm sorry to hear that.  Is there anything i can do?
+Congratulations!
+Can we choose anoher day?
+Can we meet at a different time?
+Thank you.
+Would you please call me about this?
+
+type: subjects
+dinner
+meeting
+party
+bill
+payment
+sale
+bill
+wireless
+date
+call
+credit
+lunch
+coffee
+shopping
+kids
+pictures
+photos
+vacation
+trip
+flight
+hotel
+

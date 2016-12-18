@@ -1,0 +1,196 @@
+{
+  "intents": [
+    {
+    "intent": "CountIntent",
+             "slots": [
+        {
+          "name": "readFilter",
+          "type": "readtypes"
+        },
+       {
+          "name": "fromFilter",
+          "type": "AMAZON.US_FIRST_NAME"
+        },
+       {
+          "name": "subjectFilter",
+          "type": "subjects"
+        },
+       {
+          "name": "dateFilter",
+          "type": "AMAZON.DURATION"
+        }
+   		]
+    },
+    {
+    "intent": "ReviewIntent",
+             "slots": [
+        {
+          "name": "readFilter",
+          "type": "readtypes"
+        },
+       {
+          "name": "fromFilter",
+          "type": "AMAZON.US_FIRST_NAME"
+        },
+       {
+          "name": "subjectFilter",
+          "type": "subjects"
+        },
+        {
+          "name": "dateFilter",
+          "type": "AMAZON.DURATION"
+        }
+   		]
+    },
+    {
+    "intent": "AMAZON.NextIntent"
+    },
+    {
+    "intent": "AMAZON.PreviousIntent"
+    },
+    {
+    "intent": "GoToMessageIntent",
+        "slots": [
+        {
+          "name": "messagenumber",
+          "type": "AMAZON.NUMBER"
+        }
+    		]
+    },
+    {
+    "intent": "DetailsIntent"
+    },
+    {
+    "intent": "MarkReadIntent"
+    },
+    {
+    "intent": "MarkUnReadIntent"
+    },
+    {
+    "intent": "StarIntent"
+    },
+    {
+    "intent": "UnStarIntent"
+    },
+    {
+    "intent": "DeleteIntent"
+    }, 
+    {
+    "intent": "RefreshIntent"
+    }, 
+    {
+    "intent": "ReplyIntent",
+          "slots": [
+        {
+        "name": "replymessage",
+        "type": "replies"
+        }
+    		]
+     },
+       {
+    "intent": "ReplyAllIntent",
+          "slots": [
+        {
+        "name": "replymessage",
+        "type": "replies"
+        }
+    		]
+     },
+    {
+    "intent": "PrintMessageIntent"
+    },
+    {
+    "intent": "SetPrinterIntent",
+    "slots": [
+        {
+          "name": "printernumber",
+          "type": "AMAZON.NUMBER"
+        }
+    		]
+    },
+    {
+    "intent": "ListAttachmentsIntent"
+    },
+    {
+    "intent": "PrintAttachmentsIntent",
+          "slots": [
+        {
+          "name": "AttachNum",
+          "type": "AMAZON.NUMBER"
+        }
+    		]
+    },
+    {
+    "intent": "AMAZON.HelpIntent"
+    },
+    {
+    "intent": "AMAZON.StopIntent"
+    },
+    {
+    "intent": "AMAZON.CancelIntent"
+    }, 
+    {
+    "intent": "AMAZON.YesIntent"
+    },
+    { 
+    "intent": "AMAZON.NoIntent"
+    },
+    {
+    "intent": "AMAZON.StartOverIntent"
+    },
+    {
+    "intent": "AMAZON.RepeatIntent"
+    },
+
+            {
+    "intent": "ShowMeIntent",
+               "slots": [
+        {
+          "name": "AttachNum",
+          "type": "AMAZON.NUMBER"
+        }
+    			]
+    },
+
+    {
+    "intent": "HelpWithSlotIntent",
+               "slots": [
+        {
+          "name": "helptopic",
+          "type": "helptopics"
+        }
+    			]
+    },
+    {
+      "intent":"SayPINIntent",
+      	"slots":[
+          {
+            "name":"mypin",
+            "type":"AMAZON.FOUR_DIGIT_NUMBER"
+          }
+        ]
+    },
+        {
+      "intent":"SetPINIntent",
+      	"slots":[
+          {
+            "name":"mypin",
+            "type":"AMAZON.FOUR_DIGIT_NUMBER"
+          }
+        ]
+    },
+        {
+      "intent":"ClearPINIntent"
+    },
+    {
+      "intent":"AdvancedModeOnIntent"
+    },
+    {
+      "intent":"AdvancedModeOffIntent"
+    },
+        {
+      "intent":"WaitIntent"
+    }
+      ]
+}
+  
