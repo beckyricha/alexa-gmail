@@ -693,7 +693,6 @@ function messageDetails(intent, session, response){
 	       	    try{
     		        resp=JSON.parse(scriptResponse).response.result;
 				    var plainResponse=makereadable(resp);
-				    console.log("plain response = "+plainResponse);
 				    session.attributes.helpContext=7;
     			    makeResponse(session,response,11,plainResponse);
 	       		} catch(e){
@@ -1092,13 +1091,11 @@ function listAttachments(intent, session, response){
 }
 
 function helpTheUser(intent, session, response){
-    console.log("help context = "+session.attributes.helpContext);
 	var cardTitle, cardContent, speechText,speechOutput,speakIndex;
 	var context;
 	var repromptOutput="You can say repeat that, show me, quit, or say wait, for more time.  What would you like to do?"; 
 	if(intent.name=='HelpWithSlotIntent'){context=20;}
 	else{context=session.attributes.helpContext;}
-	console.log("help context = "+context);
     switch(context){
 	case 1: //search params error or none found, no existing message list
 		session.attributes.helpContext = 30;
@@ -1470,7 +1467,6 @@ function runScripts (postData, session,scriptCallback){
             responseString += respdata;
         });
         res2.on('end', function () {
-                console.log("before callback: "+responseString);
     		return scriptCallback(null,responseString);
         });
     });
@@ -2064,7 +2060,6 @@ function setpin(intent,session,response){
 
 //craft the response for the Alexa speech and/or card
 function makeResponse(session,response,context,param1,param2){
-    console.log("speech context: "+context);
 	var speechText="";
 	session.attributes.question="";
 	var speechOutput,repromptText,repromptOutput,cardTitle,cardText,tmpSpeech;
@@ -2368,7 +2363,6 @@ function makeResponse(session,response,context,param1,param2){
 			if(typeof tmpSpeech=='object'){
 			    cardText=tmpSpeech.speech.replace(/<[^>]*>/g, "");
 			} else {cardText=tmpSpeech;}
-			console.log("tmpspeech ="+tmpSpeech);
 			response.askWithCard (speechOutput, repromptOutput, cardTitle, cardText);
 			break;
 	case 42: //user said "my PIN is..without a number or one not 4 digits
@@ -2746,7 +2740,6 @@ function makeResponse(session,response,context,param1,param2){
 			if(typeof tmpSpeech=='object'){
 			    cardText=tmpSpeech.speech.replace(/<[^>]*>/g, "");
 			} else {cardText=tmpSpeech;}
-			console.log("tmpspeech ="+tmpSpeech);
 			response.askWithCard (speechOutput, repromptOutput, cardTitle, cardText);
 			break;
 	case 42: //user said "my PIN is..without a number or one not 4 digits
