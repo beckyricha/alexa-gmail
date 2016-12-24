@@ -152,7 +152,7 @@ MyGmail.prototype.intentHandlers = {
     "ShowMeIntent": function (intent, session, response) {
  	    checkpin(intent, session,response);
     },   
-    "AMAZON.StartoverIntent": function (intent, session, response) {
+    "AMAZON.StartOverIntent": function (intent, session, response) {
      	checkpin(intent, session, response);
     },
     "HelpWithSlotIntent": function (intent, session, response) {
@@ -612,7 +612,7 @@ function getSummary (intent, session, response) {
 	//circle back and error check for valid message index (incremented/decremented above but no err check)
     if(myIndex>=listlength&&name==='AMAZON.NextIntent'){problem = 'reachedend';}
     if(myIndex<0&&name==='AMAZON.PreviousIntent'){problem = 'reachedfirst';}
-    if(name=='GoToMessageIntent'){
+    if(name==='GoToMessageIntent'){
         if(myIndex<0||myIndex>listlength){problem = 'outofbounds';}
     }
 	session.attributes.helpContext=6;
@@ -1765,7 +1765,16 @@ function checkpin(intent,session, response){
                 setPrinter(intent, session, response);
                 break;
             case 'AMAZON.StartOverIntent':
-                getCount(intent,session,response);
+                intent={
+                                "name": "GoToMessageIntent",
+                                "slots": {
+                                    "messagenumber": {
+                                        "name": "messagenumber",
+                                         "value": "1"
+                                    }
+                                }
+	                        };
+                getSummary(intent,session,response);
                 break;
             case 'SetPINIntent':
                 setpin(intent,session,response);
@@ -2147,7 +2156,6 @@ function makeResponse(session,response,context,param1,param2){
 			    break;
 		    case 'outofbounds':
 			    speechOutput="I think you were trying to go to a specific message, but I can't find the one you are looking for.  Please say go to message, and then a number between 1 and "+session.attributes.messageList.resultSizeEstimate+", or ask me to do something else.";
-		        break;
 	        }
 	        repromptOutput={speech:"<speak><p>You can say things like get all my messages, help or say quit to exit.</p> What would you like to do next?</speak>",type:'SSML'};
 	        break;
