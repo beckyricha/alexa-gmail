@@ -492,6 +492,8 @@ CountIntent how many emails are there are about {subjectFilter} received in the 
 CountIntent how many emails are there are about {subjectFilter} received in the past {dateFilter} from {fromFilter}
 CountIntent how many emails are there are about {subjectFilter} received since {dateFilter} ago
 CountIntent how many emails are there are about {subjectFilter} received since {dateFilter} ago from {fromFilter}
+ReviewIntent find all my {readFilter} messages
+ReviewIntent find messages from the last {dateFilter}
 CountIntent how many emails are there are from {fromFilter}
 CountIntent how many emails are there are from {fromFilter} about {subjectFilter}
 CountIntent how many emails are there are from {fromFilter} about {subjectFilter} from the last {dateFilter}
@@ -614,7 +616,7 @@ CountIntent how many emails are there are with subject {subjectFilter} from the 
 CountIntent how many emails are there are with subject {subjectFilter} from the past {dateFilter} from {fromFilter}
 CountIntent how many emails are there are with subject {subjectFilter} received in the last {dateFilter}
 CountIntent how many emails are there are with subject {subjectFilter} received in the last {dateFilter} from {fromFilter}
-CountIntent how many emails are there from {fromFilter} with subject {subjectFilter} from the last {dateFilter} about {subjectFilter} from {fromFilter}
+CountIntent how many emails are there from {fromFilter} with subject {subjectFilter} from the last {dateFilter} about {subjectFilter}
 CountIntent how many emails are there from the past {dateFilter} from {fromFilter}
 CountIntent how many emails are there from the past {dateFilter} from {fromFilter} about {subjectFilter}
 CountIntent how many emails are there from the past {dateFilter} from {fromFilter} with {subjectFilter} in the subject
@@ -700,254 +702,232 @@ ReviewIntent get {readFilter} messages from {fromFilter} received in the last {d
 ReviewIntent {readFilter} messages from {fromFilter} received in the last {dateFilter} with subject {subjectFilter} 
 ReviewIntent get {readFilter} messages from {fromFilter} received in the past {dateFilter}
 ReviewIntent get {readFilter} messages from {fromFilter} received in the past {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} messages from {fromFilter} received in the past {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages from {fromFilter} received in the past {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} messages from {fromFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} messages from {fromFilter} received since {dateFilter} ago about {subjectFilter}
-ReviewIntent {readFilter} messages from {fromFilter} received since {dateFilter} ago with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages from {fromFilter} received since {dateFilter} ago with subject {subjectFilter}
-ReviewIntent {readFilter} messages from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages from {fromFilter} with {subjectFilter} in the subject from the last {dateFilter}
-ReviewIntent {readFilter} messages from {fromFilter} with {subjectFilter} in the subject from the past {dateFilter}
-ReviewIntent {readFilter} messages from {fromFilter} with {subjectFilter} in the subject received in the last {dateFilter}
-ReviewIntent {readFilter} messages from {fromFilter} with {subjectFilter} in the subject received in the past {dateFilter}
-ReviewIntent {readFilter} messages from {fromFilter} with {subjectFilter} in the subject received since {dateFilter} ago
-ReviewIntent {readFilter} messages from {fromFilter} with subject {subjectFilter}
-ReviewIntent {readFilter} messages from {fromFilter} with subject {subjectFilter} from the last {dateFilter}
-ReviewIntent {readFilter} messages from {fromFilter} with subject {subjectFilter} from the past {dateFilter}
-ReviewIntent {readFilter} messages from {fromFilter} with subject {subjectFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} messages from {fromFilter} with subject {subjectFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} messages from {fromFilter} with subject {subjectFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} messages from the last {dateFilter}
-ReviewIntent {readFilter} messages from the last {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} messages from the last {dateFilter} about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} messages from the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages from the last {dateFilter} from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} messages from the last {dateFilter} from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages from the last {dateFilter} from {fromFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} messages from the last {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages from the last {dateFilter} with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} messages from the last {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} messages from the last {dateFilter} with subject {subjectFilter}  from {fromFilter}
-ReviewIntent {readFilter} messages from the past {dateFilter}
-ReviewIntent {readFilter} messages from the past {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} messages from the past {dateFilter} about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} messages from the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages from the past {dateFilter} from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} messages from the past {dateFilter} from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages from the past {dateFilter} from {fromFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} messages from the past {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages from the past {dateFilter} with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} messages from the past {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} messages from the past {dateFilter} with subject {subjectFilter}  from {fromFilter}
-ReviewIntent {readFilter} messages received in the last {dateFilter}
-ReviewIntent {readFilter} messages received in the last {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} messages received in the last {dateFilter} about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} messages received in the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages received in the last {dateFilter} from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages received in the last {dateFilter} from {fromFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} messages received in the last {dateFilter} from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} messages received in the last {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages received in the last {dateFilter} with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} messages received in the last {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} messages received in the last {dateFilter} with subject {subjectFilter}  from {fromFilter}
-ReviewIntent {readFilter} messages received in the past {dateFilter}
-ReviewIntent {readFilter} messages received in the past {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} messages received in the past {dateFilter} about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} messages received in the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages received in the past {dateFilter} from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} messages received in the past {dateFilter} from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages received in the past {dateFilter} from {fromFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} messages received in the past {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages received in the past {dateFilter} with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} messages received in the past {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} messages received in the past {dateFilter} with subject {subjectFilter}  from {fromFilter}
-ReviewIntent {readFilter} messages received since {dateFilter} ago
-ReviewIntent {readFilter} messages received since {dateFilter} ago about {subjectFilter}
-ReviewIntent {readFilter} messages received since {dateFilter} ago about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} messages received since {dateFilter} ago from {fromFilter}
-ReviewIntent {readFilter} messages received since {dateFilter} ago from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} messages received since {dateFilter} ago from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages received since {dateFilter} ago from {fromFilter} with subject {subjectFilter}
-ReviewIntent {readFilter} messages received since {dateFilter} ago with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages received since {dateFilter} ago with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} messages received since {dateFilter} ago with subject {subjectFilter}
-ReviewIntent {readFilter} messages received since {dateFilter} ago with subject {subjectFilter}  from {fromFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject from {fromFilter} from the last {dateFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject from {fromFilter} from the past {dateFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject from {fromFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject from {fromFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject from {fromFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject from the last {dateFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject from the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject from the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject received in the last {dateFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject received in the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject received in the past {dateFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject received in the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject received since {dateFilter} ago
-ReviewIntent {readFilter} messages with {subjectFilter} in the subject received since {dateFilter} ago from {fromFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} 
-ReviewIntent {readFilter} messages with subject {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} from {fromFilter} from the last {dateFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} from {fromFilter} from the past {dateFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} from {fromFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} from {fromFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} from {fromFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} messages with subject {subjectFilter} from the last {dateFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} from the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} from the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} received in the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} received in the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} messages with subject {subjectFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} messages with subject {subjectFilter} received since {dateFilter} ago from {fromFilter}
-ReviewIntent {readFilter} ones about {subjectFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} from {fromFilter} from the last {dateFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} from {fromFilter} from the past {dateFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} from {fromFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} from {fromFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} ones about {subjectFilter} from {fromFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} from the last {dateFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} from the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} from the past {dateFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} from the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} received in the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} received in the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones about {subjectFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} ones about {subjectFilter} received since {dateFilter} ago from {fromFilter}
-ReviewIntent {readFilter} ones from {fromFilter}
-ReviewIntent {readFilter} ones from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones from {fromFilter} about {subjectFilter} from the last {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} about {subjectFilter} from the past {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} about {subjectFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} about {subjectFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} about {subjectFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} ones from {fromFilter} from the last {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} from the last {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones from {fromFilter} from the last {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones from {fromFilter} from the last {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones from {fromFilter} from the past {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} from the past {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones from {fromFilter} from the past {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones from {fromFilter} from the past {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones from {fromFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} received in the last {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones from {fromFilter} received in the last {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones from {fromFilter} received in the last {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones from {fromFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} received in the past {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones from {fromFilter} received in the past {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones from {fromFilter} received in the past {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones from {fromFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} ones from {fromFilter} received since {dateFilter} ago about {subjectFilter}
-ReviewIntent {readFilter} ones from {fromFilter} received since {dateFilter} ago with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones from {fromFilter} received since {dateFilter} ago with subject {subjectFilter}
-ReviewIntent {readFilter} ones from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones from {fromFilter} with {subjectFilter} in the subject from the last {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} with {subjectFilter} in the subject from the past {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} with {subjectFilter} in the subject received in the last {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} with {subjectFilter} in the subject received in the past {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} with {subjectFilter} in the subject received since {dateFilter} ago
-ReviewIntent {readFilter} ones from {fromFilter} with subject {subjectFilter}
-ReviewIntent {readFilter} ones from {fromFilter} with subject {subjectFilter} from the last {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} with subject {subjectFilter} from the past {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} with subject {subjectFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} with subject {subjectFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} ones from {fromFilter} with subject {subjectFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} ones from the last {dateFilter}
-ReviewIntent {readFilter} ones from the last {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones from the last {dateFilter} about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} ones from the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones from the last {dateFilter} from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones from the last {dateFilter} from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones from the last {dateFilter} from {fromFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones from the last {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones from the last {dateFilter} with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} ones from the last {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones from the last {dateFilter} with subject {subjectFilter}  from {fromFilter}
-ReviewIntent {readFilter} ones from the past {dateFilter}
-ReviewIntent {readFilter} ones from the past {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones from the past {dateFilter} about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} ones from the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones from the past {dateFilter} from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones from the past {dateFilter} from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones from the past {dateFilter} from {fromFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones from the past {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones from the past {dateFilter} with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} ones from the past {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones from the past {dateFilter} with subject {subjectFilter}  from {fromFilter}
-ReviewIntent {readFilter} ones received in the last {dateFilter}
-ReviewIntent {readFilter} ones received in the last {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones received in the last {dateFilter} about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} ones received in the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones received in the last {dateFilter} from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones received in the last {dateFilter} from {fromFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones received in the last {dateFilter} from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones received in the last {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones received in the last {dateFilter} with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} ones received in the last {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones received in the last {dateFilter} with subject {subjectFilter}  from {fromFilter}
-ReviewIntent {readFilter} ones received in the past {dateFilter}
-ReviewIntent {readFilter} ones received in the past {dateFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones received in the past {dateFilter} about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} ones received in the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones received in the past {dateFilter} from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones received in the past {dateFilter} from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones received in the past {dateFilter} from {fromFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones received in the past {dateFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones received in the past {dateFilter} with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} ones received in the past {dateFilter} with subject {subjectFilter} 
-ReviewIntent {readFilter} ones received in the past {dateFilter} with subject {subjectFilter}  from {fromFilter}
-ReviewIntent {readFilter} ones received since {dateFilter} ago
-ReviewIntent {readFilter} ones received since {dateFilter} ago about {subjectFilter}
-ReviewIntent {readFilter} ones received since {dateFilter} ago about {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} ones received since {dateFilter} ago from {fromFilter}
-ReviewIntent {readFilter} ones received since {dateFilter} ago from {fromFilter} about {subjectFilter}
-ReviewIntent {readFilter} ones received since {dateFilter} ago from {fromFilter} with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones received since {dateFilter} ago from {fromFilter} with subject {subjectFilter}
-ReviewIntent {readFilter} ones received since {dateFilter} ago with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones received since {dateFilter} ago with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} ones received since {dateFilter} ago with subject {subjectFilter}
-ReviewIntent {readFilter} ones received since {dateFilter} ago with subject {subjectFilter}  from {fromFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject from {fromFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject from {fromFilter} from the last {dateFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject from {fromFilter} from the past {dateFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject from {fromFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject from {fromFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject from {fromFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject from the last {dateFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject from the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject from the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject received in the last {dateFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject received in the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject received in the past {dateFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject received in the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject received since {dateFilter} ago
-ReviewIntent {readFilter} ones with {subjectFilter} in the subject received since {dateFilter} ago from {fromFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} 
-ReviewIntent {readFilter} ones with subject {subjectFilter} from {fromFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} from {fromFilter} from the last {dateFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} from {fromFilter} from the past {dateFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} from {fromFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} from {fromFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} from {fromFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} ones with subject {subjectFilter} from the last {dateFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} from the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} from the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} received in the last {dateFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} received in the last {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} received in the past {dateFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} received in the past {dateFilter} from {fromFilter}
-ReviewIntent {readFilter} ones with subject {subjectFilter} received since {dateFilter} ago
-ReviewIntent {readFilter} ones with subject {subjectFilter} received since {dateFilter} ago from {fromFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} received in the past {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages from {fromFilter} received in the past {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} messages from {fromFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} messages from {fromFilter} received since {dateFilter} ago about {subjectFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} received since {dateFilter} ago with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages from {fromFilter} received since {dateFilter} ago with subject {subjectFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages from {fromFilter} with {subjectFilter} in the subject from the last {dateFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} with {subjectFilter} in the subject from the past {dateFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} with {subjectFilter} in the subject received in the last {dateFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} with {subjectFilter} in the subject received in the past {dateFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} with {subjectFilter} in the subject received since {dateFilter} ago
+ReviewIntent find {readFilter} messages from {fromFilter} with subject {subjectFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} with subject {subjectFilter} from the last {dateFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} with subject {subjectFilter} from the past {dateFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} with subject {subjectFilter} received in the last {dateFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} with subject {subjectFilter} received in the past {dateFilter}
+ReviewIntent find {readFilter} messages from {fromFilter} with subject {subjectFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} messages from the last {dateFilter}
+ReviewIntent find {readFilter} messages from the last {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} messages from the last {dateFilter} about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages from the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages from the last {dateFilter} from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} messages from the last {dateFilter} from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages from the last {dateFilter} from {fromFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} messages from the last {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages from the last {dateFilter} with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} messages from the last {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} messages from the last {dateFilter} with subject {subjectFilter}  from {fromFilter}
+ReviewIntent find {readFilter} messages from the past {dateFilter}
+ReviewIntent find {readFilter} messages from the past {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} messages from the past {dateFilter} about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages from the past {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages from the past {dateFilter} from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} messages from the past {dateFilter} from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages from the past {dateFilter} from {fromFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} messages from the past {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages from the past {dateFilter} with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} messages from the past {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} messages from the past {dateFilter} with subject {subjectFilter}  from {fromFilter}
+ReviewIntent find {readFilter} messages received in the last {dateFilter}
+ReviewIntent find {readFilter} messages received in the last {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} messages received in the last {dateFilter} about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages received in the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages received in the last {dateFilter} from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages received in the last {dateFilter} from {fromFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} messages received in the last {dateFilter} from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} messages received in the last {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages received in the last {dateFilter} with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} messages received in the last {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} messages received in the last {dateFilter} with subject {subjectFilter}  from {fromFilter}
+ReviewIntent find {readFilter} messages received in the past {dateFilter}
+ReviewIntent find {readFilter} messages received in the past {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} messages received in the past {dateFilter} about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages received in the past {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages received in the past {dateFilter} from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} messages received in the past {dateFilter} from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages received in the past {dateFilter} from {fromFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} messages received in the past {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages received in the past {dateFilter} with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} messages received in the past {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} messages received in the past {dateFilter} with subject {subjectFilter}  from {fromFilter}
+ReviewIntent find {readFilter} messages received since {dateFilter} ago
+ReviewIntent find {readFilter} messages received since {dateFilter} ago about {subjectFilter}
+ReviewIntent find {readFilter} messages received since {dateFilter} ago about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages received since {dateFilter} ago from {fromFilter}
+ReviewIntent find {readFilter} messages received since {dateFilter} ago from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} messages received since {dateFilter} ago from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages received since {dateFilter} ago from {fromFilter} with subject {subjectFilter}
+ReviewIntent find {readFilter} messages received since {dateFilter} ago with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages received since {dateFilter} ago with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} messages received since {dateFilter} ago with subject {subjectFilter}
+ReviewIntent find {readFilter} messages received since {dateFilter} ago with subject {subjectFilter}  from {fromFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject from {fromFilter} from the last {dateFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject from {fromFilter} from the past {dateFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject from {fromFilter} received in the last {dateFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject from {fromFilter} received in the past {dateFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject from {fromFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject from the last {dateFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject from the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject from the past {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject received in the last {dateFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject received in the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject received in the past {dateFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject received in the past {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject received since {dateFilter} ago
+ReviewIntent find {readFilter} messages with {subjectFilter} in the subject received since {dateFilter} ago from {fromFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} 
+ReviewIntent find {readFilter} messages with subject {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} from {fromFilter} from the last {dateFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} from {fromFilter} from the past {dateFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} from {fromFilter} received in the last {dateFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} from {fromFilter} received in the past {dateFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} from {fromFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} messages with subject {subjectFilter} from the last {dateFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} from the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} from the past {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} received in the last {dateFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} received in the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} received in the past {dateFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} received in the past {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} messages with subject {subjectFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} messages with subject {subjectFilter} received since {dateFilter} ago from {fromFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} from {fromFilter} from the last {dateFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} from {fromFilter} from the past {dateFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} from {fromFilter} received in the past {dateFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} from {fromFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} ones about {subjectFilter} from {fromFilter} received in the last {dateFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} from the last {dateFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} from the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} from the past {dateFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} from the past {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} received in the last {dateFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} received in the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} received in the past {dateFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} received in the past {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones about {subjectFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} ones about {subjectFilter} received since {dateFilter} ago from {fromFilter}
+ReviewIntent find {readFilter} ones from {fromFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} about {subjectFilter} from the last {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} about {subjectFilter} from the past {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} about {subjectFilter} received in the last {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} about {subjectFilter} received in the past {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} about {subjectFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} ones from {fromFilter} from the last {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} from the last {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} from the last {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones from {fromFilter} from the last {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones from {fromFilter} from the past {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} from the past {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} from the past {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones from {fromFilter} from the past {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones from {fromFilter} received in the last {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} received in the last {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} received in the last {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones from {fromFilter} received in the last {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones from {fromFilter} received in the past {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} received in the past {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} received in the past {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones from {fromFilter} received in the past {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones from {fromFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} ones from {fromFilter} received since {dateFilter} ago about {subjectFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} received since {dateFilter} ago with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones from {fromFilter} received since {dateFilter} ago with subject {subjectFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones from {fromFilter} with {subjectFilter} in the subject from the last {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} with {subjectFilter} in the subject from the past {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} with {subjectFilter} in the subject received in the last {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} with {subjectFilter} in the subject received in the past {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} with {subjectFilter} in the subject received since {dateFilter} ago
+ReviewIntent find {readFilter} ones from {fromFilter} with subject {subjectFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} with subject {subjectFilter} from the last {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} with subject {subjectFilter} from the past {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} with subject {subjectFilter} received in the last {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} with subject {subjectFilter} received in the past {dateFilter}
+ReviewIntent find {readFilter} ones from {fromFilter} with subject {subjectFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} ones from the last {dateFilter}
+ReviewIntent find {readFilter} ones from the last {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones from the last {dateFilter} about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones from the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones from the last {dateFilter} from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones from the last {dateFilter} from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones from the last {dateFilter} from {fromFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones from the last {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones from the last {dateFilter} with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} ones from the last {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones from the last {dateFilter} with subject {subjectFilter}  from {fromFilter}
+ReviewIntent find {readFilter} ones from the past {dateFilter}
+ReviewIntent find {readFilter} ones from the past {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones from the past {dateFilter} about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones from the past {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones from the past {dateFilter} from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones from the past {dateFilter} from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones from the past {dateFilter} from {fromFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones from the past {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones from the past {dateFilter} with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} ones from the past {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones from the past {dateFilter} with subject {subjectFilter}  from {fromFilter}
+ReviewIntent find {readFilter} ones received in the last {dateFilter}
+ReviewIntent find {readFilter} ones received in the last {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones received in the last {dateFilter} about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones received in the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones received in the last {dateFilter} from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones received in the last {dateFilter} from {fromFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones received in the last {dateFilter} from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones received in the last {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones received in the last {dateFilter} with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} ones received in the last {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones received in the last {dateFilter} with subject {subjectFilter}  from {fromFilter}
+ReviewIntent find {readFilter} ones received in the past {dateFilter}
+ReviewIntent find {readFilter} ones received in the past {dateFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones received in the past {dateFilter} about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones received in the past {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones received in the past {dateFilter} from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones received in the past {dateFilter} from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones received in the past {dateFilter} from {fromFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones received in the past {dateFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones received in the past {dateFilter} with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} ones received in the past {dateFilter} with subject {subjectFilter} 
+ReviewIntent find {readFilter} ones received in the past {dateFilter} with subject {subjectFilter}  from {fromFilter}
+ReviewIntent find {readFilter} ones received since {dateFilter} ago
+ReviewIntent find {readFilter} ones received since {dateFilter} ago about {subjectFilter}
+ReviewIntent find {readFilter} ones received since {dateFilter} ago about {subjectFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones received since {dateFilter} ago from {fromFilter}
+ReviewIntent find {readFilter} ones received since {dateFilter} ago from {fromFilter} about {subjectFilter}
+ReviewIntent find {readFilter} ones received since {dateFilter} ago from {fromFilter} with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones received since {dateFilter} ago from {fromFilter} with subject {subjectFilter}
+ReviewIntent find {readFilter} ones received since {dateFilter} ago with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones received since {dateFilter} ago with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} ones received since {dateFilter} ago with subject {subjectFilter}
+ReviewIntent find {readFilter} ones received since {dateFilter} ago with subject {subjectFilter}  from {fromFilter}
+ReviewIntent find {readFilter} ones with {subjectFilter} in the subject
+ReviewIntent find {readFilter} ones with {subjectFilter} in the subject from {fromFilter}
+ReviewIntent find {readFilter} ones with {subjectFilter} in the subject from {fromFilter} from the last {dateFilter}
+ReviewIntent find {readFilter} ones with {subjectFilter} in the subject from {fromFilter} from the past {dateFilter}
+ReviewIntent find {readFilter} ones with {subjectFilter} in the subject from {fromFilter} received in the last {dateFilter}
+ReviewIntent find {readFilter} ones with {subjectFilter} in the subject from {fromFilter} received in the past {dateFilter}
+ReviewIntent find {readFilter} ones with {subjectFilter} in the subject from {fromFilter} received since {dateFilter} ago
+ReviewIntent find {readFilter} ones with {subjectFilter} in the subject from the last {dateFilter}
+ReviewIntent find {readFilter} ones with {subjectFilter} in the subject from the last {dateFilter} from {fromFilter}
+ReviewIntent find {readFilter} ones with {subjectFilter} in the subject from the past {dateFilter} from 
 ReviewIntent check for {readFilter} email about {subjectFilter}
 ReviewIntent check for {readFilter} email about {subjectFilter} from {fromFilter}
 ReviewIntent check for {readFilter} email about {subjectFilter} from {fromFilter} from the last {dateFilter}
