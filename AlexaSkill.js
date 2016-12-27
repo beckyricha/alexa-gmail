@@ -61,7 +61,6 @@ AlexaSkill.prototype.eventHandlers = {
             intentName = intentRequest.intent.name,
             intentHandler = this.intentHandlers[intentName];
         if (intentHandler) {
-            console.log('dispatch intent = ' + intentName);
             intentHandler.call(this, intent, session, response);
         } else {
             throw 'Unsupported intent = ' + intentName;
@@ -82,13 +81,9 @@ AlexaSkill.prototype.eventHandlers = {
 AlexaSkill.prototype.intentHandlers = {};
 
 AlexaSkill.prototype.execute = function (event, context) {
-    try {
-        console.log("session applicationId: " + event.session.application.applicationId);
-
+    try { 
         // Validate that this request originated from authorized source.
-        if (this._appId && event.session.application.applicationId !== this._appId) {
-            console.log("The applicationIds don't match : " + event.session.application.applicationId + " and "
-                + this._appId);
+        if (this._appId && event.session.application.applicationId !== this._appId) {         
             throw "Invalid applicationId";
         }
 
@@ -104,7 +99,6 @@ AlexaSkill.prototype.execute = function (event, context) {
         var requestHandler = this.requestHandlers[event.request.type];
         requestHandler.call(this, event, context, new Response(context, event.session));
     } catch (e) {
-        console.log("Unexpected exception " + e);
         context.fail(e);
     }
 };

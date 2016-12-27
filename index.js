@@ -209,10 +209,10 @@ function getCount (intent, session, response) {
 	    }
     //if something is in the intent slot, standardize the word choices the user had:
     if(readSlot){
-	        if(readSlot=='unread'||readSlot=='new'){myFilter=' new';}
-    	    if(readSlot=='read'||readSlot=='old'){myFilter=' old';}       
+	        if(readSlot.match('read')||readSlot.match('old')){myFilter=' old';}       
+	        if(readSlot.match('unread')||readSlot.match('new')){myFilter=' new';}
 	        if(readSlot=='all'||readSlot=='total'){myFilter=' total';}
-	        if(readSlot=='starred'||readSlot=='important'){myFilter=' starred';}    
+	        if(readSlot.match('starred')||readSlot.match('important')){myFilter=' starred';}    
         }
     if(!myFilter){myFilter="";}
     //handle the date, recorded by Alexa as P[yY][mM][dD][T[hH][mM][s[.s]S]] where lower case is a number. we will convert it all //to days for ease of searching gmail, and will throw errors for anything lower than that.
@@ -419,10 +419,10 @@ function getSummary (intent, session, response) {
     		}
 			//if something is in the intent slot, standardize the word choices the user had:
 			if(readSlot){
-				if(readSlot=='unread'||readSlot=='new'){myFilter=' new';}
-				if(readSlot=='read'||readSlot=='old'){myFilter=' old';}       
+				if(readSlot.match('read')||readSlot.match('old')){myFilter=' old';}       
+				if(readSlot.match('unread')||readSlot.match('new')){myFilter=' new';}
 				if(readSlot=='all'||readSlot=='total'){myFilter=' total';}
-				if(readSlot=='starred'||readSlot=='important'){myFilter=' starred';}    
+				if(readSlot.match('starred')||readSlot.match('important')){myFilter=' starred';}    
 			}
 			if(!myFilter){myFilter=" total";}
 			switch(myFilter){
@@ -2359,8 +2359,7 @@ function makeResponse(session,response,context,param1,param2){
             repromptOutput="You can say things like next message, help, or say wait, for more time.  What would you like to do?";
 			 cardTitle="Image Attached to your message from "+session.attributes.currentMessage.from;
 			 cardText="File name: "+session.attributes.attachments[param1][1];
-			 imageurl=param2;
-			 response.askWithImageCard (speechOutput, repromptOutput, cardTitle, cardText,imageurl);
+			 response.askWithImageCard (speechOutput, repromptOutput, cardTitle, cardText,param2);
 		    break;
     case 41: //OK sent last speech to app
             speechOutput="OK.  I sent that to the Alexa app.";
