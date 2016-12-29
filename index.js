@@ -20,7 +20,7 @@ limitations under the License.
 */
 
 'use strict';
-var APP_ID = process.env.appID;
+var APP_ID = process.env.appID;wel
 
 //SETUP REFERENCES - The AlexaSkill prototype and https helper function
 
@@ -1186,7 +1186,7 @@ function helpTheUser(intent, session, response){
 		break;
 	case 18: //wrong PIN
 		speechOutput="Because you selected an access PIN, you won’t be able to use the skill without the PIN.  It should be a four digit number.  I sent a card to the Alexa app with instructions for resetting your PIN manually online.  If you know your PIN, you can say it now, or say quit to exit.  What is your access PIN?"; 
-	    cardContent="Instructions for resetting your PIN are available online.  Please use a browser to go to [site]";
+	    cardContent="Instructions for resetting your PIN are available online.  Please use a browser to go to email-skill.blogspot.com";
 	    cardTitle="Help With My Email PIN Reset";
 		break;
 	case 19: //help after prompt to add a PIN
@@ -2121,7 +2121,7 @@ function makeResponse(session,response,context,param1,param2){
 			repromptOutput="You can say say things like next message, help, or say wait, for more time.  What would you like to do?";
 			break;
 		case 7:
-			speechText="<speak><p>"+speechText+"</p><p>I need to get a list of your messages.</p><p> You can say things like check my email, review all my messages, or help.</p>  What would you like to do?</speak>";
+			speechText="<speak><p>"+speechText+"</p><p>I think you asked me to do something with a message, but first I need to get a list of your messages.</p><p> You can say things like check my email, review all my messages, or help.</p>  What would you like to do?</speak>";
 			speechOutput={speech:speechText,type:'SSML'};
 			repromptOutput="You can say things like check my email.";
 			break;
@@ -2435,7 +2435,7 @@ function makeResponse(session,response,context,param1,param2){
 	    }
     } else { //speech for not advanced mode
 	    if(!session.attributes.started&&context!=34){
-		    speechText="Welcome to the my email skill. I will offer some coaching at each step.  If you want me to talk less, you can say turn on advanced mode. ";
+		    speechText="Welcome to the my email skill.  ";
 		    session.attributes.started=true;
 	    }
 	    switch(context){
@@ -2485,7 +2485,7 @@ function makeResponse(session,response,context,param1,param2){
 			repromptOutput="You can say say things like next message, help, or say wait, for more time.  What would you like to do?";
 			break;
 		case 7:
-			speechText="<speak><p>"+speechText+"</p><p>I need to get a list of your messages.</p><p> You can say things like check my email, review all my messages, or help.</p>  What would you like to do?</speak>";
+			speechText="<speak><p>"+speechText+"</p><p>I think you asked me to do something with a message, but firsts I need to get a list of your messages.</p><p> You can say things like check my email, review all my messages, or help.</p>  What would you like to do?</speak>";
 			speechOutput={speech:speechText,type:'SSML'};
 			repromptOutput="You can say things like check my email, review all my messages, help, or say wait, for more time.  What would you like to do?";
 			break;
