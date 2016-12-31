@@ -20,7 +20,7 @@ limitations under the License.
 */
 
 'use strict';
-var APP_ID = process.env.appID;wel
+var APP_ID = process.env.appID;
 
 //SETUP REFERENCES - The AlexaSkill prototype and https helper function
 
@@ -549,6 +549,10 @@ function getSummary (intent, session, response) {
 					else{session.attributes.helpContext=2;}
 					makeResponse(session,response,5,myFilter,searchString);
         	    } else {
+        	        	var subject;
+                        var date;
+                        var from,x;
+                        var tmpfrom="";
         	        session.attributes.messageList = mailResponse;
 				    //call gmail again for first message
 				    messageID=mailResponse.messages[0].id;
@@ -569,27 +573,32 @@ function getSummary (intent, session, response) {
     	        			    session.attributes.currentMessage="";
     	        			    makeResponse(session,response,3);
         			        }
-        			        var subject;
-        			        var date;
-        			        var from;
-						    for (var headerIndex = 0; headerIndex < mailResponse2.payload.headers.length-1; headerIndex++) {
+						    for (var headerIndex = 0; headerIndex < mailResponse2.payload.headers.length; headerIndex++) {
 				                switch(mailResponse2.payload.headers[headerIndex].name){
                 				    case 'Subject':
                     				    subject = makereadable(mailResponse2.payload.headers[headerIndex].value);
                         				break;
                     				case 'From':
-                        				from = makereadable(mailResponse2.payload.headers[headerIndex].value);
+                    				    from = makereadable(mailResponse2.payload.headers[headerIndex].value).split(" ");
+                    				    if(from.length==1){
+                    				        tmpfrom = from[0];
+                    				    }
+                    				    else{
+                    				        for (x in from){
+                    				            if(from[x].indexOf("@")==-1){tmpfrom=tmpfrom+" "+from[x];}
+                    				        }
+                    				    }
+                    				    from = tmpfrom;
                  	   	    			break;
                 			    	case 'Date':
                     			    	let tmpdate = new Date(mailResponse2.payload.headers[headerIndex].value);
+                    			    	date = tmpdate.toDateString();
                     			    	let today= new Date();
-                    			    	if(tmpdate.toDateString()==today.toDateString()){
-                    			    	    date="today";}
-                    			    	else {
-                    			    	    date = tmpdate.toDateString();
-                    			    	    //remove any leading zero from the day to correct Alexa speech quirk.
-                    			    	    if(date.charAt(8)=='0'){date=date.replace("0", "");}
-                    			    	}
+                    			    	if(date==today.toDateString()){date="today";}
+                    			    	today.setDate(today.getDate() - 1);
+                                        if(today.toDateString()==date){date='yesterday';}
+                    			    	//remove any leading zero from the day to correct Alexa speech quirk.
+                    			    	if(date.charAt(8)=='0'){date=date.replace("0", "");}
                     					break;
             	       				default:
     				    		}
@@ -607,6 +616,7 @@ function getSummary (intent, session, response) {
     }
     else {
     //just use the existing message list, but get another message;
+
     var problem="";
 	var listlength=messageList.resultSizeEstimate;
 	//circle back and error check for valid message index (incremented/decremented above but no err check)
@@ -622,6 +632,10 @@ function getSummary (intent, session, response) {
 	myPath = "/gmail/v1/users/me/messages/"+messageID;
 	query="&format=METADATA";
 	getGmail(myPath,query,session, function mailResponseCallback3 (err, mailResponse) {
+	    	var subject;
+    var date;
+    var from,x;
+    var tmpfrom="";
     if (err) {
 	    if(err=="Error: 401"){
             makeResponse(session,response,2);
@@ -638,27 +652,33 @@ function getSummary (intent, session, response) {
     	   session.attributes.messageIndex=myIndex;
             makeResponse(session,response,3);  
         } else {
-            var subject;
-            var date;
-            var from;
-		    for (var headerIndex = 0; headerIndex < mailResponse.payload.headers.length-1; headerIndex++) {
+		    for (var headerIndex = 0; headerIndex < mailResponse.payload.headers.length; headerIndex++) {
 			switch(mailResponse.payload.headers[headerIndex].name){
                 case 'Subject':
                     subject = makereadable(mailResponse.payload.headers[headerIndex].value);
                 	break;
                 case 'From':
-                	from = makereadable(mailResponse.payload.headers[headerIndex].value);
+                	from = makereadable(mailResponse.payload.headers[headerIndex].value).split(" ");
+                    				    if(from.length==1){
+                    				        tmpfrom = from[0];
+                    				    }
+                    				    else{
+                    				        tmpfrom="";
+                    				        for (x in from){
+                    				            if(from[x].indexOf("@")==-1){tmpfrom=tmpfrom+" "+from[x];}
+                    				        }
+                    				    }
+                    from = tmpfrom;
                     break;
                 case 'Date':
                 	let tmpdate = new Date(mailResponse.payload.headers[headerIndex].value);
+                    date = tmpdate.toDateString();
                     let today= new Date();
-                    if(tmpdate.toDateString()==today.toDateString()){
-                        date="today";}
-                    else {date = tmpdate.toDateString();
-                        //remove any leading zero from the day to correct Alexa speech quirk.
-                        if(date.charAt(8)=='0'){date=date.replace("0", "");}
-                    }
-                    
+                    if(date==today.toDateString()){date="today";}
+                    today.setDate(today.getDate() - 1);
+                    if(today.toDateString()==date){date='yesterday';}
+                    //remove any leading zero from the day to correct Alexa speech quirk.
+                    if(date.charAt(8)=='0'){date=date.replace("0", "");}
                     break;
             	default:
     		}
@@ -756,32 +776,33 @@ function replyMessage(intent, session, response){
             } else {
                 session.attributes.helpContext=9;
                 session.attributes.lastIntent=intent;
+                var FnName;
+            if(session.attributes.lastIntent.name=='ReplyIntent'){FnName = 'sendReply';}
+            if(session.attributes.lastIntent.name=='ReplyAllIntent'){FnName = 'sendReplyAll';}
+            session.attributes.postData = "{'function':'"+FnName+"','parameters':['"+messageID+"','"+replyslot+"']}";
                 makeResponse(session,response,14,replyslot);
             }
 	    } else {    
-            var FnName;
-            var content=session.attributes.lastIntent.slots.replymessage;
-            if(session.attributes.lastIntent.name=='ReplyIntent'){FnName = 'sendReply';}
-            if(session.attributes.lastIntent.name=='ReplyAllIntent'){FnName = 'sendReplyAll';}
+            postData = session.attributes.postData;
+            session.attributes.postData = "";
             session.attributes.lastIntent="";
-	        postData = "{'function':"+FnName+",'parameters':['"+messageID+"','"+content+"']}";
-	        runScripts (postData, session, function scriptCallback(err,scriptResponse){
+	        runScripts (postData, session, function scriptCallback(err,scriptResponse){	         
 			    if (err) {
-            		session.attrributes.helpContext=3;
+            		session.attributes.helpContext=3;
             		makeResponse(session,response,3);
 		        } else {
 		            var resp;
 		            try{
             	       resp=JSON.parse(scriptResponse).response.result;
 				        if(resp=='OK'){
-					        session.attrributes.helpContext=6;
+					        session.attributes.helpContext=6;
 						    makeResponse(session,response,15);
 						} else {
-						    session.attrributes.helpContext=3;
+						    session.attributes.helpContext=3;
             		        makeResponse(session,response,3);
 						}
 		            } catch(e){
-		                session.attrributes.helpContext=3;
+		                session.attributes.helpContext=3;
     		            makeResponse(session,response,3);
 		            }
 			    }
@@ -2072,7 +2093,7 @@ function makeResponse(session,response,context,param1,param2){
 	var speechText="";
 	session.attributes.question="";
 	var speechOutput,repromptText,repromptOutput,cardTitle,cardText,tmpSpeech;
-	var speakindex,msg,printers,i, attachments,imageurl;
+	var speakindex,msg,printers,i, attachments,imageurl,readFilter;
     if(session.attributes.advanced){ //speech for advanced mode
 	    if(!session.attributes.started){
 		    speechText="You opened this skill in advanced mode.  If you change your mind and want more coaching, just say turn advanced mode off. ";
@@ -2112,10 +2133,12 @@ function makeResponse(session,response,context,param1,param2){
 			repromptOutput="You can try another search, or say things like review all my messages, help, or say wait, for more time.  What would you like to do?";
 			break;
 		case 6:
+		    if(session.attributes.readFilter==' total'&&session.attributes.searchString){readFilter='';}
+		    else{readFilter=session.attributes.readFilter;}
 			if(session.attributes.messageList.resultSizeEstimate==1){
-				speechText="<speak><p>"+speechText+"</p><p>You have one"+session.attributes.readFilter+" message"+session.attributes.searchString+".</p></speak>";
+				speechText="<speak><p>"+speechText+"</p><p>You have one"+readFilter+" message"+session.attributes.searchString+".</p></speak>";
 			} else {
-				speechText="<speak><p>"+speechText+"</p><p>You have "+session.attributes.messageList.resultSizeEstimate+" "+session.attributes.readFilter+" messages"+session.attributes.searchString+".</p></speak>";
+				speechText="<speak><p>"+speechText+"</p><p>You have "+session.attributes.messageList.resultSizeEstimate+" "+readFilter+" messages"+session.attributes.searchString+".</p></speak>";
 			}
 			speechOutput={speech:speechText,type:'SSML'};
 			repromptOutput="You can say say things like next message, help, or say wait, for more time.  What would you like to do?";
@@ -2126,10 +2149,12 @@ function makeResponse(session,response,context,param1,param2){
 			repromptOutput="You can say things like check my email.";
 			break;
 		case 8:
+		    if(session.attributes.readFilter==' total'&&session.attributes.searchString){readFilter='';}
+		    else{readFilter=session.attributes.readFilter;}
 		    if(session.attributes.messageList.resultSizeEstimate==1){
-			speechText="<speak><p>"+speechText+"</p><p>You have one"+session.attributes.readFilter+" message"+session.attributes.searchString+"</p>";
+			speechText="<speak><p>"+speechText+"</p><p>You have one"+readFilter+" message"+session.attributes.searchString+"</p>";
 			} else {
-				speechText="<speak><p>"+speechText+"</p><p>You have "+session.attributes.messageList.resultSizeEstimate+" "+session.attributes.readFilter+" messages"+session.attributes.searchString+"</p>";
+				speechText="<speak><p>"+speechText+"</p><p>You have "+session.attributes.messageList.resultSizeEstimate+" "+readFilter+" messages"+session.attributes.searchString+"</p>";
 			}
 			speakindex=session.attributes.messageIndex+1;
 			msg=session.attributes.currentMessage;
@@ -2181,7 +2206,7 @@ function makeResponse(session,response,context,param1,param2){
                     speechOutput="OK.  I removed the star from that message.";
                 break;        
                 case "AMAZON.YesIntent":
-                speechOutput="OK.  I moved that message to your trash folder.  To stop hearing it on your list you can say refresh.";
+                speechOutput="OK.  I moved that message to your trash folder.";
             }
             repromptOutput="You can say things like print this, next message, help, or say wait, for more time. What would you like to do?";
             break;
@@ -2300,7 +2325,7 @@ function makeResponse(session,response,context,param1,param2){
 		    repromptOutput="You can say help, say quit to exit, or say wait, for more time. What would you like to do?";
 		    break;
 	case 30: //delete confirm
-		    speechOutput="Did you ask me to move this message to the trash folder?";
+		    speechOutput="Did you ask me to erase this message?";
 		    repromptOutput="You can say yes to erase this message, say no, or say help for more information.  Do you want to erase this message?";
             session.attributes.question=5;
         	break;
@@ -2475,10 +2500,12 @@ function makeResponse(session,response,context,param1,param2){
 			repromptOutput="You can try another search, or say things like review all my messages, help, or say wait, for more time.  What would you like to do?";
 			break;
 		case 6:
+		    if(session.attributes.readFilter==' total'&&session.attributes.searchString){readFilter='';}
+		    else{readFilter=session.attributes.readFilter;}
 			if(session.attributes.messageList.resultSizeEstimate==1){
-				speechText="<speak><p>"+speechText+"</p><p>You have one"+session.attributes.readFilter+" message"+session.attributes.searchString+".</p>";
+				speechText="<speak><p>"+speechText+"</p><p>You have one"+readFilter+" message"+session.attributes.searchString+".</p>";
 			} else {
-				speechText="<speak><p>"+speechText+"</p><p>You have "+session.attributes.messageList.resultSizeEstimate+" "+session.attributes.readFilter+" messages"+session.attributes.searchString+".</p>";
+				speechText="<speak><p>"+speechText+"</p><p>You have "+session.attributes.messageList.resultSizeEstimate+" "+readFilter+" messages"+session.attributes.searchString+".</p>";
 			}
 			speechText=speechText+"<p> You can say things like read more, print this, next, or help.</p>  What would you like to do?</speak>";
 			speechOutput={speech:speechText,type:'SSML'};
@@ -2490,10 +2517,12 @@ function makeResponse(session,response,context,param1,param2){
 			repromptOutput="You can say things like check my email, review all my messages, help, or say wait, for more time.  What would you like to do?";
 			break;
 		case 8:
+		    if(session.attributes.readFilter==' total'&&session.attributes.searchString){readFilter='';}
+		    else{readFilter=session.attributes.readFilter;}
 		    if(session.attributes.messageList.resultSizeEstimate==1){
-			speechText="<speak><p>"+speechText+"</p><p>You have one"+session.attributes.readFilter+" message"+session.attributes.searchString+"</p>";
+			speechText="<speak><p>"+speechText+"</p><p>You have one"+readFilter+" message"+session.attributes.searchString+"</p>";
 			} else {
-				speechText="<speak><p>"+speechText+"</p><p>You have "+session.attributes.messageList.resultSizeEstimate+" "+session.attributes.readFilter+" messages"+session.attributes.searchString+"</p>";
+				speechText="<speak><p>"+speechText+"</p><p>You have "+session.attributes.messageList.resultSizeEstimate+" "+readFilter+" messages"+session.attributes.searchString+"</p>";
 			}
 			speakindex=session.attributes.messageIndex+1;
 			msg=session.attributes.currentMessage;
@@ -2758,7 +2787,7 @@ function makeResponse(session,response,context,param1,param2){
 		repromptOutput="You can say your PIN, say help, say quit to exit, or say wait, for more time.  What is your four-digit PIN?";
 		break;
 	case 44: //user spoke incorrect PIN
-		speechOutput = {speech:"<speak><p>"+speechText+"</p>Sorry. <say-as interpret-as=\"digits\">"+param1+"</say-as> is not the correct access PIN.  Please say your PIN again, or you can say help, or say quit to exit.  What would you like to do?</speak>",type: 'SSML'};
+		speechOutput = {speech:"<speak><p>"+speechText+"</p>Sorry. <say-as interpret-as=\"digits\">"+param1+"</say-as> is not the correct access PIN.  Please say your PIN again, or you can say help, or say quit to exit.  What is your access PIN?</speak>",type: 'SSML'};
 		repromptOutput="You can say your PIN, say help, say quit to exit, or say wait, for more time.  What is your four-digit PIN?";
 		break;
 	case 45: //user has no PIN, first use only prompts asking about setting one.
