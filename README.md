@@ -8,6 +8,8 @@ This skill is live on Amazon, and can be installed from the Alexa app.  User inf
 
 Developer info for those who wish to tweak it are posted as a <a href="https://www.hackster.io/user1681818436/gmail-for-alexa-3fd61a">project on hackster.io</a> and will be here soon.
 
+<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=ae042d4b-1dc0-49c9-bdcb-c75f357c93af&storeId=seniorhacks-20"></script>
+
 
 
 
