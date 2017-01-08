@@ -1,0 +1,232 @@
+# Introduction
+
+I have spent a long time researching ideas and conducting my own projects to help an older loved one stay connected to friends and family. Voice services (Siri, OK Google, Alexa, etc) are an underdeveloped potential resource for this community, but still limited by a few things:
+<ul>
+<li><p>They are mostly for "early adopters" and "power users" so they aren't always easy to use. The are made to be quick and efficient, but you need to learn a lot of commands.</li></p>
+<li><p>These devices move too fast (Alexa does, too, but I did some things to try to fix this).</li></p>
+<li><p>Often, you need to combine them with another gadget anyway, and those can be more of a chore than a pleasure if you are not used to them.</li></p>
+</ul>
+A contest on <a href='https://www.hackster.io/'>hackster.io</a> got me motivated to do something I had been considering for a while, which is tap into Alexa's capabilities for email (uses GMail, but can also read any other account you link to GMail). Most skills just ask a question, and maybe get an answer, but Alexa is far more capable than the skills would let on, and has the potential to really help the senior adult community. I hope this example sparks some other thinking in this area.
+
+I made a <a href='http://email-skill.blogspot.com'>web site</a> with the user info.  The developer side follows here. There is a forum on hte blogspot site - please use it, as this really needs broader community testing to find all the hiccups. I am also in the process of setting up a <a href='http://seniorhacks.blogspot.com'>sister site</a> to discuss other technology applications for senior adults' direct use and for caregivers. I have a few other things I've done in the past, devices & software I've tried, and more projects I am planning. I suspect this community could offer a lot of helpful things for this user community, so <a href='mailto:beckyricha.gmail.com'>drop me a note</a> if you would like to contribute an idea or a guest post to that blog.
+
+Back to this project, I wrote it in node.js, even though I have not used javascript much before. This was because the Alexa skill samples were in this language, and because I didn't know what I was getting into with asynchronous programming, which would have probably changed my mind. (I'm very old, and so are the languages I know :) I'm afraid that will show in my code, but it does get the job done (or will, after you all help me debug it and make other suggestions). Ironically, inefficient code has some benefits here. It helps to slow Alexa down a little, which the target user audience can actually find helpful. I also opted to focus on user experience, so some of the inefficiencies are by design. For example, the code checks for a PIN on all intents, whether or not they access private information. This is so that the user will experience a consistent initial response, no matter what Alexa thinks it heard. This is experimental, and Alexa choosing the wrong intent is the most common issue I have had so far (at first got it right ~90% of the time for me, but has been getting better with practice on my part). There is error handling, but it may not make email as "plain and simple" as I'd hoped.
+
+My favorite features are "show me" and the google cloud printing. Both of these solve a huge user need for older users and email. Many people only want email connect to friends and get pictures of the grandkids. Now they can just ask Alexa if the message has attachments, and say "show me attachment 1" to see the image on their tablet (my blog will eventually explain how I made a windows tablet easy to use this way), or, better, to bring it up on their fire TV. If they would rather print and read their messages or attachments, they can do that as well. Obviously, there is some setup that may require some tech support, but if you are currently doing all of a loved one's email management they may really enjoy being able to do some things without assistance.
+
+As you review it, please keep in mind a few things I was trying to do, and remember that you hacksters are not the target audience ("advanced mode" is there for you, though).
+<ul>
+<li><p>The end goal is that users will not have to memorize a lot of steps or try to read from a list of instructions. This makes the skill more chatty than many people may prefer.</p></li>
+<li><p>I added a feature to say "wait" that just gives people a moment to think between commands, because it is not possible to adjust the Echo's timeout.</p></li>
+<li><p>I added a feature "repeat that" to say again whatever was last said.</p></li>
+<li><p>"Show me" will send whatever was last said to the app, for those who need to see it. This really matters if trying to read the message body, because very few messages are clearly readable.</p></li>
+<li><p>"Show me attachment x" will send small enough jpg and png images to an app card.</p></li>
+<li><p>This does have PIN protection, but it gives you up to 5 tries before a lockout (3 seemed a mismatch to the target user community). My web site has a link to reset the PIN with your Google credentials.</p></li>
+<li><p>The reading aloud is very experimental, but when things sound bad, the printing works pretty well, at least in my testing so far.
+I added <a href='email-skill.blogspot.com'>demonstration videos on the blogspot page</a> to get a sense of that.</p></li>
+</ul>
+You can simply download hte published skill from Amazon to check it out.  Also, use my forum if you find bugs or thin of a feature that should be published.  The instrucitons below are about how to duplicate it for yourself as your own playground.  The setup is involved (not hard, but many steps). 
+
+# How to set up the Skill:
+The easy way is to wait and see if Amazon publishes it, but that is not for hacksters. So, to set up your very own version and hack/change it at will, here's what you need to do. None of it is advanced (cutting/pasting mostly), but it is a bit involved.
+
+## Overview:
+The instructions below will give you a step by step, but here's the whole picture to help you decide if this is for you:
+
+1. Set up a Google developer account if you don't already have one, and create a set of appropriate credentials that will be used to identify your skill to Google.
+
+2. Set up an account on Alexa Developer Console if you don't already have one.
+
+3. Create your skill, and copy in the files for the interaction model, as well as provide authorization information for the needed google services.
+
+4. Set up an account on AWS Lambda if you don't already have one. This is an Amazon service that hosts the skill's code (you can technically host this elsewhere, but you're on your own for adapting the instructions to other systems). Note that the Lambda platform is free until you get to fairly high usage rates not anticipated here, but you still have to provide them a payment method to get started. If that will be an issue for you, you need to host somewhere else or wait for the skill to be published.
+
+5. Upload the code I provide and upload it into an AWS Lambda Function.
+
+6. Create a Google apps script using code I provide, and publish it for your own use.
+
+7. Link these accounts together using fields in each system that identify the apps to each other.
+
+8. Start enjoying the skill, and hack away at it as desired to suit your own preferences. I commented it with that in mind but you can use the forum for any needed help.
+
+## Files you will need:
+You can download a zip, or the individual files below, on my <a href='https://github.com/beckyricha/alexa-gmail'>GitHub page</a>.
+<ul>
+<li>code.zip (you won’t need to unzip this unless you want to look it over)</li>
+<li>Intents.txt</li>
+<li>Utterances.txt</li>
+<li>Slot types.txt</li>
+<li>google apps script.txt</li>
+</ul>
+
+## If you would like to follow along and understand the steps:
+Amazon's instructions are <a href='https://developer.amazon.com/alexa-skills-kit'>here</a>, and we will be building a custom interaction skill.
+
+## Step 1: Google Developer Console Setup:
+1. Go to https://console.developers.google.com and, if you don't already have an account, agree to the terms of service to continue.
+
+2. On the page that opens, click "credentials" along the left side, and then "create a project." You can call it whatever you wish. The name is only for your use and is not needed by the skill.
+
+3. Click Create credentials and select oauth client id.
+
+4. Under application Type, select "web application" and give the credential any name you choose.
+
+5. We will need to come back to the JavaScript origins and redirect URIs later, after setting up our skill. For now, just click "create" and then a box will pop up with your oauth client information. You can come back later, but it will be easiest to use the copy boxes along the side here and paste these into a file so that you can find them. You will need the client ID and client secret in a later step.
+
+6. Close the oauth popup box when you are done and go back to the credential screen. At the top, select oauth consent screen. This is where you put information that the users will see when asked to confirm the skill. Using for yourself, make this whatever you want, but it's good to know it's here if making your own skills later.
+
+7. Along the left, select "dashboard." You need to add some permissions here to let your skill use specific Google APIs. For each of the following, select "add API," click the item from the API list (it's easiest to find them by typing into the search box, as they don't all show), and then select "enable:”
+<ul>
+<li>Gmail API</li>
+<li>Google Apps Script Execution API</li>
+<li>Google Drive API</li>
+<li>When successful, all three of these should appear at the bottom of the dashboard page.</li>
+</ul>
+
+8. You are finished with this for now, but may wish to leave it open in a browser tab as we will need to circle back with information from Amazon later.
+
+## Step 2: Setting up AWS Lambda:
+1. Go to https://aws.amazon.com/lambda/ and click "get started with AWS Lambda" near the center of the page.
+
+2. If you have an account, sign in; otherwise, select the option for a new user and follow the instructions to create an account. You will need a payment method, but it is unlikely that such a skill could incur cost. The cost information is here. Note that this skill does not use other AWS services, and runs in the US East region.
+
+3. Once in the console, navigate under "services" to Lambda.
+
+4. Select "create a lambda function" and then select "blank function" under blueprints.
+
+5. On the "Configure Triggers" page that comes up, you will link this to the Alexa Skill. However, first you need to ensure that the region dropdown on the top right selects "US East (N. Virginia)." Alexa skills need to run from specific Amazon servers, and the option will not appear if you are not on the right server.
+
+6. Click the dashed outline under configure triggers, and a popup list will appear. Select Alexa Skills Kit, and then click "next."
+
+7. Give your function a name and description, and set the runtime to Node.js 4.3.
+
+8. In the dropdown menu that says Code entry type, select “upload a .ZIP file.” Click the “upload button and select the file I provided called code.zip.
+
+Note that you will be able to modify index.js live within Lambda, but you will not be able to view or modify Alexa.js except by changing offline and resubmitting both files as a zip. If you have used other skills, Alexa.js may be familiar, as it is standard “helper” code provided by Amazon. However, I modified it to allow the skill to respond with account linking and image cards sent to the app. This may be useful to other skill developers.
+
+9. Under Lambda function handler and role, you should be able to leave most things as they default. Under Role, select “choose an existing role” and then “lambda_basic_execution.” If this does not appear for some reason, select “create a custom role,” leave the defaults on the page that comes up, and click “Allow.”
+
+10. For “advanced settings” you may want to play with this to get the right balance for your Internet speeds, but I suggest larger memory and a longer timeout (mine is set to 256MB and 45 seconds). This allows sufficient resources for the processing and return of many http calls to Google. If it times out or runs out of memory, your skill will crash ungracefully. You can change this later if needed.
+
+11. Select “next” and on the next page select “create function.”
+
+12. On the confirmation page, there is a code in the top right labeled ‘ARN.” It looks something like : arn:aws:lambda:us-east-1:{a bunch of numbers}:function:{your function name}. Keep this somewhere handy as you will need it for a later step.
+
+13. That’s all for now on this piece, but you may wish to leave this open in a separate browser tab to add linking info later.
+
+## Step 3: Alexa Developer Console Setup:
+1. Go to https://developer.amazon.com and either sign in or create an account. When the page opens, click the "get started" button labeled "Alexa Skills Kit." (if this is not the page the opens, select “Alexa” from the top menu).
+
+2. On the page that opens, click the "add a new skill" button near the top.
+
+3. On the page that opens, leave the skill type as "custom interaction model" and the language as English. Enter any name you choose for your skill.
+
+4. Invocation name is important, but you can change what you select later if you change your mind. This is what you say to open the skill - either "ask [] to" do something, or "open []." To make the skill function as in my instructions, you should make this "my email" but if that is a feature you don't like, here is your place to change it. [one other reason you may wish to, and Amazon may ask me to for - before the skill is enabled, Alexa already responds to “open my email” with a sad story about not being able to do email; so far, once I enable the skill this has caused me no issues].
+
+5. Under global fields, nothing needs to be changed. This skill does not use the audio player directives.
+
+6. Click "next" to continue to the interaction model. This is where you define how Alexa interprets the things you say and sends them to your code.
+
+7. In the box labeled "Intent schema" copy the contents of the file I provided, called "intents.txt" - note that this input box does error checking and will display a red x if something got changed.
+
+8. For custom slots, this skill does use four, but they can't just be cut and pasted all at once. The contents are in the file "slot types.txt." For each of the four slot types, press "add slot type." A popup will appear where you can paste the type into the box labeled "type" and the values into the box labeled "values." Note that the list of values can be cut and pasted all at once, and the new lines will paste OK, at least on a PC.
+
+9. For "sample utterances" copy the contents of the file "utterances.txt" into the box.
+
+10. Click next to go to configuration. This is where we will link the skill to our AWS lambda code, and provide information about how to get authorization from Google. This is most important to get correct, or you will have many headaches.
+
+11. Fill in the form fields as follows:
+
+a. Service endpoint type: AWS Lambda ARN (Amazon Resource Name) - Note - you can choose another endpoint type, but you will need to figure out how to translate these parameters for that service.
+
+b. Geographical region: North America
+
+c. For the box under “North America" – paste in the ARN you got at the end of setting up your lambda function.
+
+d. Account linking: yes
+
+e. Authorization URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&response_type=code
+
+f. Client id - This is the client ID that was generated as part of your credentials during google developer account setup.
+
+g. Domain list: google.com, googleapis.com (each of these goes in its own separate entry)
+
+h. Scopes - you will need 5 of these: (unfortunately, you cannot follow preferred Google practice and selectively add authorizations as needed, because that requires a visual user interface)
+<ul>
+<li>https://www.googleapis.com/auth/cloudprint</li>
+<li>https://www.googleapis.com/auth/gmail.modify</li>
+<li>https://www.googleapis.com/auth/script.external_request</li>
+<li>https://mail.google.com/</li>
+<li>https://www.googleapis.com/auth/drive</li>
+</ul>
+i. Authorization Grant Type: Auth Code Grant
+
+j. Access Token URI: https://accounts.google.com/o/oauth2/token
+
+k. Client Secret: This also was part of your Google Developer authorization credentials obtained in an earlier step.
+
+l. Client Authentication Scheme: http basic
+
+m. Privacy policy URL - not needed as this will not be for Amazon publication, but mine is at http://email-skill.blogspot.com/p/privacy-policy.html.
+
+12. Click next, just to save everything. The next page is not needed now, except to make sure the switch to enable the skill for testing is turned on. When you finish the setup, if you want to explore what the code is doing this is useful. It allows you to type in text and see both what the skill sends as input and what the code outputs. There is also another box that lets you simulate different Alexa speech before you change things in the code. I highly recommend using this page to better understand the code logic if you choose to hack it to your purposes. This is the best way to get a sense of the many, many session attribute variables I had to use.
+
+13. You will need a few things here for the “putting it all together” step, later. There should be a long number labeled “ID” at the top of the page. It starts amz1.ask… This is your Skill ID. Save it somewhere you can find it. You will also need the “redirect URLs” on the configuration page. These are not editable by you, as they come from Amazon. Google will need these elsewhere.
+
+## Step 4: Set up Google Apps Script:
+Some of the code would have been very complex to write from scratch, but is much easier using this tool, which incorporates Google APIs.
+
+1. Go to http://script.google.com, which should lead you to a page called “untitled project.” Overwrite the function that is there with the text I provided in google apps script.txt.
+
+2. Under “resources” select “Developer Console Project.” The names you give things don’t matter here, and are for your own use.
+
+3. On the screen that pops up, this code will get a default project ID. However, we want Google to identify it as the same app that the user will authorize when they enable the skill. To do this, you will need a different project ID to paste in the box that says “enter project number here.” To get this:
+<ul>
+<li>Click “View Developer Console” if it is not still open from step 1.</li>
+<li>Your project should still be showing from earlier, but if not, choose it in the dropdown menu to the right of the “Google API” logo.</li>
+<li>Select the menu on the top right, and choose “project settings.”</li>
+<li>Copy the project number.</li>
+</ul>
+4. Paste the project number you just got into the apps script box that says “enter project number here” and confirm when prompted. (note that the confirm is not the same number again – oddly, they give you a different number to paste there…)
+
+5. Once it successfully changes, you can close that box.
+
+6. Under “resources” select “advanced Google Services,” turn on Drive API and click “OK.”
+
+7. Select “publish” and “deploy as API executable.” In this scenario you are likely only publishing for your own use but if you wish to share, you can do so. That’s how my published skill will work, but I did not want to publish my project numbers and Script IDs here.
+
+8. Enter any description you wish and click “deploy,” then “continue.”
+
+9. Copy the long string from the “current API ID” box and put it somewhere you can find it. (if it is not selectable, close this and re-open the “deploy as API” dialogue).
+
+## Step 4: Linking it all together:
+This is the home stretch. This is where we will get all those identifying numbers and tell each app that the other exists.
+
+1. In AWS Lambda, open your function.
+
+2. On the “code” tab, first make sure there is not an error on the first line. I have had issues uploading the code and funding a period inserted at the first character. If there, delete that and press save. (you will know because there will be a warning symbol along the left).
+
+3. Below the code, go to the environment variables. You will create two (if you are not using AWS Lambda, hopefully your platform uses environment variables, but if not you will have to locate these and manually edit the code).
+
+Name the first one scriptsID (case matters). For its value, paste in the “Current API ID” you just got from step 3, #9.
+The second is called appID and its value is the ID of your Alexa skill (the one that started “amz1.ask…” from step 1).
+
+4. Click “save.”
+
+5. In your Google Developer Console, open the credential you created in Step 1. There should be an option to add authorized JavaScript origins and authorized redirect URIs. You will get these from the redirect pages you saved when creating your Alexa Skill. (Step 3, #13). I can’t guarantee Amazon won’t change these, but my URIs looked like:
+<ul>
+<li>https://pitangui.amazon.com/api/skill/link/[ID number]; and</li>
+<li>https://layla.amazon.co.uk/api/skill/link/[ID number].</li>
+</ul>
+The host name only (everything before “/api…”) goes into the authorized JavaScript origins. Two boxes, one with each address.
+
+The full redirect URI goes into “authorized redirect URIs” (again, one in each of two boxes).
+
+Now, here is what you just set up:
+
+Your Alexa Skill knows how to get access tokens from Google and where to find your Lambda code (this is on its configuration page).
+Your Lambda code knows which Alexa Skill is authorized to use it and where to get the Gmail Scripts (the environment variables we set).
+Google knows what Amazon sites are authorized to call it (the redirect and origin URIs we pasted in) and knows the app is authorized by you (your client ID and secret you placed on the Alexa Skill Configuration page does this)
+
+## Step 5: Enjoy!
+You should be able to install the skill for your own use in your Alexa App. It will appear under “your skills.” If you don’t see it, make sure “enabled for testing” is turned on in the Alexa Developer Console page for the skill. Get a feel for how it works, then hack away to make it your own. I commented the code like crazy to help, but also feel free to use the “developer” part of the forum.
