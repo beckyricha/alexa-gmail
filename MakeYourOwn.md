@@ -2,9 +2,9 @@
 
 I have spent a long time researching ideas and conducting my own projects to help an older loved one stay connected to friends and family. Voice services (Siri, OK Google, Alexa, etc) are an underdeveloped potential resource for this community, but still limited by a few things:
 <ul>
-<li><p>They are mostly for "early adopters" and "power users" so they aren't always easy to use. The are made to be quick and efficient, but you need to learn a lot of commands.</li></p>
-<li><p>These devices move too fast (Alexa does, too, but I did some things to try to fix this).</li></p>
-<li><p>Often, you need to combine them with another gadget anyway, and those can be more of a chore than a pleasure if you are not used to them.</li></p>
+<li><p>They are mostly for "early adopters" and "power users" so they aren't always easy to use. The are made to be quick and efficient, but you need to learn a lot of commands.</p></li>
+<li><p>These devices move too fast (Alexa does, too, but I did some things to try to fix this).</p></li>
+<li><p>Often, you need to combine them with another gadget anyway, and those can be more of a chore than a pleasure if you are not used to them.</p></li>
 </ul>
 A contest on <a href='https://www.hackster.io/'>hackster.io</a> got me motivated to do something I had been considering for a while, which is tap into Alexa's capabilities for email (uses GMail, but can also read any other account you link to GMail). Most skills just ask a question, and maybe get an answer, but Alexa is far more capable than the skills would let on, and has the potential to really help the senior adult community. I hope this example sparks some other thinking in this area.
 
