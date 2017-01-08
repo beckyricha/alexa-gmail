@@ -16,14 +16,14 @@ My favorite features are "show me" and the google cloud printing. Both of these 
 
 As you review it, please keep in mind a few things I was trying to do, and remember that you hacksters are not the target audience ("advanced mode" is there for you, though).
 <ul>
-<li><p>The end goal is that users will not have to memorize a lot of steps or try to read from a list of instructions. This makes the skill more chatty than many people may prefer.</p></li>
-<li><p>I added a feature to say "wait" that just gives people a moment to think between commands, because it is not possible to adjust the Echo's timeout.</p></li>
-<li><p>I added a feature "repeat that" to say again whatever was last said.</p></li>
-<li><p>"Show me" will send whatever was last said to the app, for those who need to see it. This really matters if trying to read the message body, because very few messages are clearly readable.</p></li>
-<li><p>"Show me attachment x" will send small enough jpg and png images to an app card.</p></li>
-<li><p>This does have PIN protection, but it gives you up to 5 tries before a lockout (3 seemed a mismatch to the target user community). My web site has a link to reset the PIN with your Google credentials.</p></li>
-<li><p>The reading aloud is very experimental, but when things sound bad, the printing works pretty well, at least in my testing so far.
-I added <a href='email-skill.blogspot.com'>demonstration videos on the blogspot page</a> to get a sense of that.</p></li>
+<li>The end goal is that users will not have to memorize a lot of steps or try to read from a list of instructions. This makes the skill more chatty than many people may prefer.</li>
+<li> added a feature to say "wait" that just gives people a moment to think between commands, because it is not possible to adjust the Echo's timeout.</li>
+<li>I added a feature "repeat that" to say again whatever was last said.</li>
+<li>"Show me" will send whatever was last said to the app, for those who need to see it. This really matters if trying to read the message body, because very few messages are clearly readable.</li>
+<li>"Show me attachment x" will send small enough jpg and png images to an app card.</li>
+<li>This does have PIN protection, but it gives you up to 5 tries before a lockout (3 seemed a mismatch to the target user community). My web site has a link to reset the PIN with your Google credentials.</li>
+<li>The reading aloud is very experimental, but when things sound bad, the printing works pretty well, at least in my testing so far.
+I added <a href='email-skill.blogspot.com'>demonstration videos on the blogspot page</a> to get a sense of that.</li>
 </ul>
 You can simply download hte published skill from Amazon to check it out.  Also, use my forum if you find bugs or thin of a feature that should be published.  The instrucitons below are about how to duplicate it for yourself as your own playground.  The setup is involved (not hard, but many steps). 
 
