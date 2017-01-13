@@ -6,9 +6,8 @@ Users can review, erase, mark read/unread/starred/unstrarred, send messages and 
 
 This skill is live on Amazon, and can be installed from the Alexa app.  User information is on <a href="http://email-skill.blogspot.com">my Blogger page.</a>
 
-The full story of what I was trying to do with this, and developer instrucitons for those who wish to tweak it are <a href="https://beckyricha.github.io/alexa-gmail/MakeYourOwn.html">here.
+The full story of what I was trying to do with this, and developer instrucitons for those who wish to tweak it are <a href="https://beckyricha.github.io/MakeYourOwn.html">here.
 
-<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=ae042d4b-1dc0-49c9-bdcb-c75f357c93af&storeId=seniorhacks-20"></script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
