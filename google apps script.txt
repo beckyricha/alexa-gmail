@@ -325,30 +325,3 @@ function localDelete(fileID,auth) {
       var resp = UrlFetchApp.fetch(fetch,options);
       return;
 }
-  
-up old stored files on opening the skill
-  var myname="cardImage"; //temp file name used when storing image
-  var foldername="Alexa-Skill-Files"
-  var fileID, files, folder;
-  var folders = DriveApp.getFoldersByName(foldername)
-  if(folders.hasNext()){
-    folder=folders.next();
-    files = folder.getFilesByName(myname)
-    while (files.hasNext()){ //clear any "show me" image files
-      fileID=files.next().getId();
-      localDelete(fileID,auth);
-    } 
-   } else {DriveApp.createFolder(foldername);}
-   return;
-}
-
-function localDelete(fileID,auth) {
-      var options = {
-      headers: {
-      Authorization: 'Bearer ' + auth
-      },'method' : 'DELETE'}
-      var fetch='https://www.googleapis.com/drive/v2/files/'+fileID
-      var resp = UrlFetchApp.fetch(fetch,options);
-      return;
-}
-  
