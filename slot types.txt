@@ -50,7 +50,6 @@ party
 bill
 payment
 sale
-bill
 wireless
 date
 call
